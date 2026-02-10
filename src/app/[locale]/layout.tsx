@@ -20,6 +20,11 @@ import "@/tailwind";
 
 import { NuqsAdapter } from "nuqs/adapters/next/app";
 
+import { ModalProvider } from "@/providers/modal-provider";
+
+import { DemoModal } from "@/components/modals/demo-modal";
+import GlobalLoader from "@/components/ui/loading-indicator";
+
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"]
@@ -68,12 +73,13 @@ export default async function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} flex min-h-screen w-full flex-col antialiased`}
       >
+        <GlobalLoader />
         <Providers messages={messages} locale={locale}>
-          <NuqsAdapter>
+          
+      
             <Header />
             <main className="flex-1">{children}</main>
             <Toaster richColors />
-          </NuqsAdapter>
         </Providers>
 
         {env.NEXT_PUBLIC_GA_ID && <GoogleAnalytics gaId={env.NEXT_PUBLIC_GA_ID} />}

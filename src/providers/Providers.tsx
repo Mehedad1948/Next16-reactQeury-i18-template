@@ -1,8 +1,11 @@
 "use client";
 
 import { type AbstractIntlMessages } from "next-intl";
+import { NuqsAdapter } from "nuqs/adapters/next/app";
 
 import { IntlProvider, QueryProvider, ThemeProvider } from "@/providers";
+
+import { ModalProvider } from "./modal-provider";
 
 export function Providers({
   children,
@@ -15,9 +18,14 @@ export function Providers({
 }) {
   return (
     <ThemeProvider>
-      <IntlProvider messages={messages} locale={locale}>
-        <QueryProvider>{children}</QueryProvider>
-      </IntlProvider>
+      <NuqsAdapter>
+        <IntlProvider messages={messages} locale={locale}>
+          <QueryProvider>
+            <ModalProvider />
+            {children}
+          </QueryProvider>
+        </IntlProvider>
+      </NuqsAdapter>
     </ThemeProvider>
   );
 }

@@ -1,9 +1,9 @@
-
-'use server'
+"use server";
 
 import Link from "next/link";
 
 import { GitBranch, Github, Rocket } from "lucide-react";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 import { Balancer } from "react-wrap-balancer";
 
 import { env } from "@/env";
@@ -12,10 +12,10 @@ import { stackData } from "@/data";
 
 import { StackList } from "@/widgets";
 import { Button } from "@/ui";
-import { getTranslations, setRequestLocale } from 'next-intl/server';
+import LoadingIndicator from '@/components/ui/loading-indicator';
 
 export async function Dashboard({ locale }: { locale: string }) {
-  'use cache'
+  "use cache";
 
   setRequestLocale(locale);
 
@@ -57,6 +57,7 @@ export async function Dashboard({ locale }: { locale: string }) {
             target="_blank"
             rel="noopener noreferrer"
           >
+         
             <Rocket className="h-4 w-4" aria-hidden="true" />
             {t("deployToVercel")}
           </Link>
@@ -69,6 +70,12 @@ export async function Dashboard({ locale }: { locale: string }) {
           >
             <GitBranch className="h-4 w-4" aria-hidden="true" />
             {t("useTemplate")}
+          </Link>
+        </Button>
+        <Button variant="outline" size="sm" asChild>
+          <Link href="/test">
+            <GitBranch className="h-4 w-4" aria-hidden="true" />
+            test
           </Link>
         </Button>
       </div>

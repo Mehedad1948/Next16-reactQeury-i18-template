@@ -12,13 +12,13 @@ import { env } from "@/env";
 
 import { routing } from "@/i18n/routing";
 
-import { Providers } from "@/providers";
+import { Header } from "@/components/layouts/header/Header";
 import { Toaster } from "@/ui";
+import { Providers } from "@/providers";
 
-import { Header } from '@/components/layouts/header/Header';
 import "@/tailwind";
 
-import { NuqsAdapter } from 'nuqs/adapters/next/app'
+import { NuqsAdapter } from "nuqs/adapters/next/app";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",

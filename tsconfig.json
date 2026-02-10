@@ -13,6 +13,9 @@
     "isolatedModules": true,
     "jsx": "react-jsx",
     "incremental": true,
+      "rules": {
+    "@typescript-eslint/no-explicit-any": "off"
+  },
     "plugins": [
       {
         "name": "next"

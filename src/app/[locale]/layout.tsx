@@ -18,6 +18,8 @@ import { Toaster } from "@/ui";
 import { Header } from '@/components/layouts/header/Header';
 import "@/tailwind";
 
+import { NuqsAdapter } from 'nuqs/adapters/next/app'
+
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"]
@@ -41,7 +43,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
 }
 
 export function generateStaticParams() {
-  return routing.locales.map((locale) => ({locale}));
+  return routing.locales.map((locale) => ({ locale }));
 }
 
 export default async function RootLayout({
@@ -67,9 +69,11 @@ export default async function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} flex min-h-screen w-full flex-col antialiased`}
       >
         <Providers messages={messages} locale={locale}>
-          <Header />
-          <main className="flex-1">{children}</main>
-          <Toaster richColors />
+          <NuqsAdapter>
+            <Header />
+            <main className="flex-1">{children}</main>
+            <Toaster richColors />
+          </NuqsAdapter>
         </Providers>
 
         {env.NEXT_PUBLIC_GA_ID && <GoogleAnalytics gaId={env.NEXT_PUBLIC_GA_ID} />}

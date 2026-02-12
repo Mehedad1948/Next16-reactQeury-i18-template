@@ -40,11 +40,11 @@ To enable static prerendering for our locale routes, every Layout and Page insid
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
 }
-
+```
 ### 2. Required: Set Request Locale
 In Server Components, Pages, and Layouts, you **must** call `setRequestLocale` before accessing translations. The `locale` is passed as a prop to these components. This signals Next.js to treat the locale as a static parameter rather than a dynamic header.
 
-typescript
+```typescript
 // app/[locale]/dashboard/page.tsx
 import { setRequestLocale } from 'next-intl/server';
 import { getTranslations } from 'next-intl/server';
@@ -58,17 +58,17 @@ export default async function DashboardPage({ params: { locale } }: Props) {
 
   return <h1>{t('title')}</h1>;
 }
-
+```
 ### 3. Navigation Wrappers
 Do **not** use `next/link` or `next/navigation` directly. We must use the specific navigation APIs created by our routing configuration to handle locale prefixes automatically.
 
 Import these from your local navigation configuration (e.g., `@/i18n/routing`):
 
-typescript
+```typescript
 // ✅ CORRECT
 import { Link, redirect, usePathname, useRouter } from "@/i18n/routing";
 
 // ❌ INCORRECT
 // import { Link } from "next/link";
 // import  useRouter } from "next/navigation";
-``
+```

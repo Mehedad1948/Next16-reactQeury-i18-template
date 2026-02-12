@@ -10,7 +10,7 @@ export default function ModalExample() {
   const { setIsOpen } = useUrlModal("show-demo");
 
   return (
-    <div className="flex min-h-screen w-full flex-col items-center justify-center gap-8 p-24">
+    <div className="flex  w-full flex-col items-center justify-center gap-8 p-24">
       <div className="text-center">
         <h1 className="mb-4 text-2xl font-bold">Enterprise Modal Pattern</h1>
 

@@ -1,4 +1,4 @@
-"use server";
+"use cache";
 
 import Link from "next/link";
 
@@ -10,19 +10,18 @@ import { env } from "@/env";
 
 import { stackData } from "@/data";
 
+import LoadingIndicator from "@/components/ui/loading-indicator";
 import { StackList } from "@/widgets";
 import { Button } from "@/ui";
-import LoadingIndicator from '@/components/ui/loading-indicator';
 
 export async function Dashboard({ locale }: { locale: string }) {
-  "use cache";
-
   setRequestLocale(locale);
 
   const t = await getTranslations("Dashboard");
 
   return (
     <section className="container py-16">
+      <div className="bg-orange-100 p-6 text-center">{(Math.random() * 1000).toFixed(0)}</div>
       <div className="flex flex-col items-center justify-center gap-6">
         <Balancer
           as="h1"
@@ -57,7 +56,6 @@ export async function Dashboard({ locale }: { locale: string }) {
             target="_blank"
             rel="noopener noreferrer"
           >
-         
             <Rocket className="h-4 w-4" aria-hidden="true" />
             {t("deployToVercel")}
           </Link>

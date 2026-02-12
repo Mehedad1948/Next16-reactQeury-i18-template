@@ -18,6 +18,8 @@ import { Providers } from "@/providers";
 
 import "@/tailwind";
 
+import { Suspense } from "react";
+
 import { NuqsAdapter } from "nuqs/adapters/next/app";
 
 import { ModalProvider } from "@/providers/modal-provider";
@@ -75,11 +77,11 @@ export default async function RootLayout({
       >
         <GlobalLoader />
         <Providers messages={messages} locale={locale}>
-          
-      
-            <Header />
-            <main className="flex-1">{children}</main>
-            <Toaster richColors />
+          <Header />
+          <main className="flex-1">
+            <Suspense>{children}</Suspense>
+          </main>
+          <Toaster richColors />
         </Providers>
 
         {env.NEXT_PUBLIC_GA_ID && <GoogleAnalytics gaId={env.NEXT_PUBLIC_GA_ID} />}

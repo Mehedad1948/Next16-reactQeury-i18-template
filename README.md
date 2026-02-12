@@ -1,4 +1,4 @@
-### The “Litmus Test”
+# The “Litmus Test” (When to  Use React Query)
 Ask yourself these 3 questions about a specific piece of data (e.g., a list of products, a user profile, a blog post):
 
 Does this data change while the user is looking at it? (e.g., live stock prices, chat messages, notification counts)
@@ -71,4 +71,62 @@ import { Link, redirect, usePathname, useRouter } from "@/i18n/routing";
 // ❌ INCORRECT
 // import { Link } from "next/link";
 // import  useRouter } from "next/navigation";
+```
+
+# Server-Side Protection (`<Protect />`)
+
+The `<Protect>` component is a **Server Component** designed to wrap UI elements, Pages, or Layouts. It performs authentication and role verification on the server before sending HTML to the client.
+
+**Import:**
+```tsx
+import Protect from "@/components/utils/Protect";
+```
+### 1. Section-Level Protection
+Use this to hide specific parts of the UI based on roles. If the user is not authorized, you can render a `fallback` (like a message or disabled button) or render nothing at all.
+
+```tsx
+export default function Navbar() {
+  return (
+<nav>
+<Link href="/">Home</Link>
+
+{/* Only visible to logged-in users with ADMIN role */}
+<Protect 
+roles={["ADMIN"]} 
+fallback={<span className="text-gray-400">Read Only View</span>}
+>
+<AdminSettingsButton />
+</Protect>
+</nav>
+  );
+}
+```
+### 2. Full Page Protection (with Redirect)
+Use this in `page.tsx` or `layout.tsx` to protect an entire route. If the user is not authorized, they will be immediately redirected via `next/navigation`.
+
+```tsx
+// app/dashboard/page.tsx
+export default function DashboardPage() {
+  return (
+<Protect 
+roles={["USER", "ADMIN"]} 
+redirectTo="/auth/login" // 👈 Triggers 307 Redirect if unauthorized
+>
+<main>
+<h1>User Dashboard</h1>
+<p>Private user data...</p>
+</main>
+</Protect>
+  );
+}
+```
+
+### Component Props
+```tsx
+| Prop | Type | Description |
+| :--- | :--- | :--- |
+| `children` | `ReactNode` | The content to verify access for. |
+| `roles` | `string[]` | (Optional) Array of allowed roles (e.g., `["ADMIN"]`). If omitted, checks only if user is logged in. |
+| `fallback` | `ReactNode` | (Optional) Content to render if access is denied. Defaults to `null`. |
+| `redirectTo`|`string` | (Optional) If provided, unauthorized users are redirected to this path instead of showing the fallback. |
 ```

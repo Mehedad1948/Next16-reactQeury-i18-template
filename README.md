@@ -1,4 +1,4 @@
-The “Litmus Test”
+### The “Litmus Test”
 Ask yourself these 3 questions about a specific piece of data (e.g., a list of products, a user profile, a blog post):
 
 Does this data change while the user is looking at it? (e.g., live stock prices, chat messages, notification counts)

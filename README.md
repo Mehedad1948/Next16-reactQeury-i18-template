@@ -70,5 +70,5 @@ import { Link, redirect, usePathname, useRouter } from "@/i18n/routing";
 
 // ❌ INCORRECT
 // import { Link } from "next/link";
-// import { useRouter } from "next/navigation";
-`
+// import  useRouter } from "next/navigation";
+``

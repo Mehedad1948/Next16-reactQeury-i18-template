@@ -26,6 +26,7 @@ import { ModalProvider } from "@/providers/modal-provider";
 
 import { DemoModal } from "@/components/modals/demo-modal";
 import GlobalLoader from "@/components/ui/loading-indicator";
+import { pick } from "@/lib/helpers";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -76,7 +77,7 @@ export default async function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} flex min-h-screen w-full flex-col antialiased`}
       >
         <GlobalLoader />
-        <Providers messages={messages} locale={locale}>
+        <Providers messages={pick(messages, 'common', 'ui', 'error')} locale={locale}>
           <Header />
           <main className="flex-1">
             <Suspense>{children}</Suspense>

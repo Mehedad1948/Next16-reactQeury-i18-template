@@ -1,5 +1,5 @@
 "use client";
-
+import pick from 'lodash/pick';
 import { NextIntlClientProvider, type AbstractIntlMessages } from "next-intl";
 
 export function IntlProvider({
@@ -11,8 +11,9 @@ export function IntlProvider({
   messages: AbstractIntlMessages;
   locale?: string;
 }) {
+
   return (
-    <NextIntlClientProvider messages={messages} locale={locale} timeZone="Europe/Istanbul">
+    <NextIntlClientProvider messages={pick(messages, 'ClientCounter')} locale={locale} timeZone="Europe/Istanbul">
       {children}
     </NextIntlClientProvider>
   );

@@ -4,7 +4,17 @@ import bundleAnalyzer from "@next/bundle-analyzer";
 import createNextIntlPlugin from "next-intl/plugin";
 import type { RuleSetRule } from "webpack";
 
-const withNextIntl = createNextIntlPlugin();
+const withNextIntl = createNextIntlPlugin({
+  experimental: {
+    messages: {
+      path: "./messages",
+      locales: "infer",
+      format: "json",
+      precompile: true
+    }
+  }
+});
+//  https://next-intl.dev/blog/precompilation
 const withBundleAnalyzer = bundleAnalyzer({
   enabled: process.env.ANALYZE === "true"
 });

@@ -1,3 +1,12 @@
+# 📚 Architecture & Patterns
+
+This project utilizes specific data structuring patterns introduced in Next.js 16, utilizing cache components and partial rerendering (PPR).
+
+**Recommended Reference:**
+To understand the core architectural decisions and data flow used in this application, please watch the following guide:
+
+- [**Next.js Patterns: Public Pages with Personalization**](https://www.youtube.com/watch?v=F6romq71KtI)
+
 # The “Litmus Test” (When to  Use React Query)
 Ask yourself these 3 questions about a specific piece of data (e.g., a list of products, a user profile, a blog post):
 
